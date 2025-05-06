@@ -1,0 +1,30 @@
+<div class="search-container">
+  <input type="text" placeholder="Search items..." (input)="onSearch($event)">
+  <select id="attributeFilter" (change)="onFilterChange($event)">
+    <option value="">All</option>
+    <option value="Army DMG plus">Army DMG plus</option>
+    <option value="Navy DMG plus">Navy DMG plus</option>
+    <option value="Air DMG plus">Air DMG plus</option>
+    <!-- Add more options as needed -->
+  </select>
+  <label>
+    <input type="checkbox" (change)="onSortChange($event)">
+    Sort by Value
+  </label>
+  <label>
+    Limit:
+    <input type="number" [(ngModel)]="limit" (input)="onLimitChange($event)" min="1">
+  </label>
+  <button (click)="onSearchButtonClick()">Search</button>
+</div>
+
+<div class="items-grid">
+  <div *ngFor="let item of items" class="item-card">
+    <h2>{{ item.name }}</h2>   
+    <img [src]="item.imageUrl" alt="{{ item.name }}">
+    <p>{{ item.description }}</p>
+    <ul>
+      <li *ngFor="let attribute of item.attributes">{{ attribute.attributeType }}: {{ attribute.attributeValue }}</li>
+    </ul>
+  </div>
+</div>

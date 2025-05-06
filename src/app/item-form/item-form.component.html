@@ -1,0 +1,35 @@
+<div class="item-form">
+    <h2>{{ isEditMode ? 'Edit Item' : 'Add Item' }}</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="item.name" name="name" required>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="item.description" name="description" required></textarea>
+      </div>
+      <div>
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" [(ngModel)]="item.imageUrl" name="imageUrl" required>
+      </div>
+      
+      <div class="attributes">
+        <h3>Attributes</h3>
+        <button type="button" (click)="addAttribute()">Add Attribute</button>
+        <div *ngFor="let attribute of item.attributes; let i = index" class="attribute">
+          <div>
+            <label for="attributeType-{{i}}">Type:</label>
+            <input type="text" id="attributeType-{{i}}" [(ngModel)]="attribute.attributeType" name="attributeType-{{i}}" required>
+          </div>
+          <div>
+            <label for="attributeValue-{{i}}">Value:</label>
+            <input type="text" id="attributeValue-{{i}}" [(ngModel)]="attribute.attributeValue" name="attributeValue-{{i}}" required>
+          </div>
+          <button type="button" (click)="removeAttribute(i)">Remove</button>
+        </div>
+      </div>
+      
+      <button type="submit">{{ isEditMode ? 'Update' : 'Add' }} Item</button>
+    </form>
+  </div>
